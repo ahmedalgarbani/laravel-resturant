@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+
     protected $fillable = [
         'name',
         'email',
@@ -42,4 +44,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+// User.php
+
+    public function chats() {
+        return $this->hasMany(Chat::class, 'sender_id','id')->orWhere('receiver_id',$this->id);
+    }
+
+    public function orders() {
+        return $this->hasMany(Order::class, 'user_id','id');
+    }
+
 }

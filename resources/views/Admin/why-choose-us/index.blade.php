@@ -131,7 +131,7 @@
                     <div class="modal-body">
                         <p>هل انت متاكد من عملية الحذف ؟</p><br>
                         <input type="hidden" name="id" id="id" >
-                        <input type="text" readonly name="why_name" id="why_name" >
+                        <input type="text" readonly disabled name="why_name" id="why_name" >
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>

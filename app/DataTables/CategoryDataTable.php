@@ -79,14 +79,15 @@ class CategoryDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+
             Column::make('id'),
             Column::make('name'),
-            Column::make('status'),
             Column::make('show_at_home'),
+            Column::make('status'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(150)
+                ->width(140)
                 ->addClass('text-center'),
         ];
     }

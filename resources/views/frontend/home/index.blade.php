@@ -24,9 +24,7 @@
         OFFER ITEM START
     ==============================-->
 @include('frontend.home.components.item')
-    <!-- CART POPUT START -->
-@include('frontend.home.components.popup')
-    <!-- CART POPUT END -->
+
     <!--=============================
         OFFER ITEM END
     ==============================-->
@@ -90,7 +88,7 @@
     <!--=============================
         BLOG 2 START
     ==============================-->
-@include('frontend.home.components.blog')
+{{--@include('frontend.home.components.blog')--}}
     <!--=============================
         BLOG 2 END
     ==============================-->

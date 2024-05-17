@@ -45,6 +45,7 @@ class ProductController extends Controller
         $product->name =$request->name;
         $product->price =$request->price;
         $product->offer_price =$request->offer_price;
+        $product->quantity =$request->quantity;
         $product->category_id =$request->category;
         $product->long_description =$request->long_description;
         $product->short_description =$request->short_description;
@@ -92,6 +93,7 @@ class ProductController extends Controller
         $product->name =$request->name;
         $product->price =$request->price;
         $product->offer_price =$request->offer_price;
+        $product->quantity =$request->quantity;
         $product->category_id =$request->category;
         $product->long_description =$request->long_description;
         $product->short_description =$request->short_description;

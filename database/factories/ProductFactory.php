@@ -26,6 +26,7 @@ class ProductFactory extends Factory
             },
             'price'=>fake()->randomFloat(2,10,200),
             'offer_price'=>fake()->randomFloat(2,1,100),
+            'quantity'=>200,
             'short_description'=>fake()->paragraph(),
             'long_description'=>fake()->paragraph(),
             'sku'=>fake()->unique()->ean13(),

@@ -149,24 +149,83 @@
             <li class="menu-header">Dashboard</li>
             <li class="dropdown active">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
-
             </li>
-            <li class="dropdown ">
+            <li>
+                <a href="{{route('admin.dailyoffer.index')}}" class="nav-link"><i class="fas fa-fire"></i><span>DailyOffer</span></a>
+            </li>
+            <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>SlideHome</span></a>
                 <ul class="dropdown-menu">
-                    <li class=active><a class="nav-link" href="{{route('admin.slider.index')}}">slide Dashboard</a></li>
-                </ul>
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Why choose us</span></a>
-                <ul class="dropdown-menu">
-                    <li class="active"><a class="nav-link" href="{{route('admin.why-choose-us.index')}}">Why choose us</a></li>
-                </ul>
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Manage Resturant</span></a>
-                <ul class="dropdown-menu">
-                    <li class="active"><a  href="{{route('admin.category.index')}}">Categories</a></li>
-                    <li class="active"><a  href="{{route('admin.product.index')}}">Products</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.slider.index')}}">Slide Dashboard</a></li>
                 </ul>
             </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Section</span></a>
+                <ul class="dropdown-menu">
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.why-choose-us.index')}}">Why choose us</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.banner-slider.index')}}">Banner Slider</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.chef.index')}}">Chef</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.appdownlaod.index')}}">App Download</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.Testimonial.index')}}">Testimonial</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.counter.index')}}">Counter</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.socail-link.index')}}">Social Link</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.footer-info.index')}}">Footer Info</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Pages</span></a>
+                <ul class="dropdown-menu">
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.custom-page.index')}}">Custom Page</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.termsCondition.index')}}">Terms Condition</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.privacyPolicy.index')}}">Privacy Policy</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.about.index')}}">About</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.contact.index')}}">Contact</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Orders</span></a>
+                <ul class="dropdown-menu">
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.order.index')}}">Show Orders</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.pending-order.index')}}">Pending</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.declined-order.index')}}">Decline</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.delivered-order.index')}}">Delivered</a></li>
+                    <li class="nav-link"><a class="nav-link" href="{{route('admin.in_proccess-order.index')}}">In Proccess</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Manage Restaurant</span></a>
+                <ul class="dropdown-menu">
+                    <li class="nav-link"><a href="{{route('admin.category.index')}}">Categories</a></li>
+                    <li class="nav-link"><a href="{{route('admin.product.index')}}">Products</a></li>
+                    <li class="nav-link"><a href="{{route('admin.product-review.index')}}">Product - Reviews</a></li>
+                    <li class="nav-link"><a href="{{route('admin.coupon.index')}}">Coupon</a></li>
+                    <li class="nav-link"><a href="{{route('admin.delivery.index')}}">Delivery</a></li>
+                    <li class="nav-link"><a href="{{route('admin.payment-getway.index')}}">Payment</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="{{route('admin.chat.index')}}" class="nav-link"><i class="fas fa-fire"></i><span>Chating</span></a>
+            </li>
 
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Settings</span></a>
+                <ul class="dropdown-menu">
+                    <li class="nav-link"><a href="{{route('admin.global_setting.index')}}">Global Setting</a></li>
+                    <li class="nav-link"><a href="{{route('admin.logo.index')}}">Logo</a></li>
+                    <li class="nav-link"><a href="{{route('admin.email.index')}}">Email Setting</a></li>
+                    <li class="nav-link"><a href="{{route('admin.appearance.index')}}">Appearance</a></li>
+                    <li class="nav-link"><a href="{{route('admin.seo_setting.index')}}">Seo Setting</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="{{route('admin.news-letter.index')}}" class="nav-link"><i class="fas fa-fire"></i><span>News Letter</span></a>
+            </li>
+            <li>
+                <a href="{{route('admin.menu-builder.index')}}" class="nav-link"><i class="fas fa-fire"></i><span>Menu Builder</span></a>
+            </li>
+             <li>
+                <a href="{{route('admin.AccountManagement.index')}}" class="nav-link"><i class="fas fa-fire"></i><span>Account Management</span></a>
+            </li>
         </ul>
-
+    </aside>
 </div>

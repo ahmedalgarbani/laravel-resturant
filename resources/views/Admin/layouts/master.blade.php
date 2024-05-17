@@ -3,7 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>General Dashboard &mdash; Stisla</title>
+    <title>Fast Food</title>
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="{{asset('admin/assets/modules/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/modules/fontawesome/css/all.min.css')}}">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{{URL::asset('admin/assets/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('admin/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}">
+
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/components.css')}}">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <!-- Internal Data table css -->
     <link href="{{ URL::asset('admin/assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('admin/assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
@@ -61,6 +75,9 @@
 
 
 <!-- Internal Data tables -->
+<script src="{{URL::asset('admin/assets/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')}}"></script>
+<script src="{{URL::asset('admin/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
+
 <script src="{{ URL::asset('admin/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ URL::asset('admin/assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
 <script src="{{ URL::asset('admin/assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
@@ -113,6 +130,7 @@
 <script src="{{URL::asset('//cdn.datatables.net/2.0.3/js/dataTables.min.js')}}"></script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" ></script>--}}
     <script>
+
         toastr.options.progressBar = true;
         @if ($errors->any())
 

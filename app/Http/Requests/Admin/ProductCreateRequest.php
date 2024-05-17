@@ -27,6 +27,7 @@ class ProductCreateRequest extends FormRequest
             'category'=>['required','integer'],
             'price'=>['required','numeric'],
             'offer_price'=>['nullable','numeric'],
+            'quantity'=>['required','numeric'],
             'short_description'=>['required','max:5000'],
             'long_description'=>['required','max:10000'],
             'sku'=>['nullable','max:255'],

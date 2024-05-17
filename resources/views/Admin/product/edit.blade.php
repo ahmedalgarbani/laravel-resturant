@@ -45,6 +45,11 @@
                     </div>
                     <div class="row">
                         <div class="col">
+                            <label> quantity </label>
+                            <input class="form-control " value="{{$product->quantity}}" name="quantity"
+                                   type="text"  >
+                        </div>
+                        <div class="col">
                             <label for="inputName" class="control-label"> category</label>
                             <select name="category"  class="form-control SlectBox"  >
                                 @foreach($categories as $category)

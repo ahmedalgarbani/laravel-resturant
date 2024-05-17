@@ -11,6 +11,10 @@ class Product extends Model
     protected $guarded=[];
 
 
+    public function dailyOffers()
+    {
+        return $this->hasMany(DailyOffer::class);
+    }
 
     function category(){
         return $this->belongsTo(Category::class);
@@ -23,6 +27,9 @@ class Product extends Model
     }
     function option(){
         return $this->hasMany(ProductOption::class);
+    }
+    function reviews(){
+        return $this->hasMany(ProductRating::class,'product_id','id');
     }
 
 }

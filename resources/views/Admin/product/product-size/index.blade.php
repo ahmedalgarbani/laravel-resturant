@@ -73,7 +73,7 @@
                                                     <tr role="row" class="odd">
                                                         <td tabindex="0" class="sorting_1">{{$i}}</td>
                                                         <td>{{$size->name}}</td>
-                                                        <td>{{$size->price}}</td>
+                                                        <td>{{currencyPosition($size->price)}}</td>
                                                         <td><button class="btn btn-outline-danger btn-sm "
                                                                     data-del="{{ $size->id }}"
                                                                     data-toggle="modal"
@@ -169,7 +169,7 @@
                                                     <tr role="row" class="odd">
                                                         <td tabindex="0" class="sorting_1">{{$i}}</td>
                                                         <td>{{$option->name}}</td>
-                                                        <td>{{$option->price}}</td>
+                                                        <td>{{currencyPosition($option->price)}}</td>
                                                         <td><button class="btn btn-outline-danger btn-sm "
                                                                     data-delv="{{$option->id}}"
                                                                     data-toggle="modal"

@@ -52,9 +52,9 @@ class ProductDataTable extends DataTable
                     return "<span class='bage badge-danger rounded'>No </span>";
                 }
             })->addColumn('price',function ($query){
-                return '$'.$query->price;
+                return currencyPosition($query->price);
             })->addColumn('offer_price',function ($query){
-                return '$'.$query->offer_price;
+                return currencyPosition($query->offer_price);
             })->addColumn('category',function ($query){
                 return Category::findOrFail($query->category_id)->name;
             })

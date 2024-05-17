@@ -168,8 +168,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\SettingsServiceProvider::class,
+        App\Providers\PaymentGatewaySettingsServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\HtmlServiceProvider::class,
+        App\Providers\CustomeMailServiceProvider::class
     ])->toArray(),
 
     /*

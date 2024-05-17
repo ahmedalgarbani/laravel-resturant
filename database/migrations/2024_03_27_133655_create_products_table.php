@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('long_description',3000);
             $table->double('price');
             $table->double('offer_price')->default(0);
+            $table->integer('quantity');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->string('seo_title')->nullable();
             $table->string('seo_description')->nullable();

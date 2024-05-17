@@ -30,8 +30,9 @@
                 $products = \App\Models\Product::where(['category_id'=>$category->id,'show_at_home'=>1,'status'=>1])
                                                         ->orderBy('id','DESC')
                                                         ->take(8)
+                                                        ->withAvg('reviews','rating')
+                                                        ->withCount('reviews')
                                                         ->get();
-
 
                 @endphp
             @foreach($products as $product)
@@ -42,28 +43,29 @@
                                 <a class="category" href="#">{{@$product->category->name}}</a>
                             </div>
                             <div class="fp__menu_item_text">
-                                <p class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <i class="far fa-star"></i>
-                                    <span>10</span>
-                                </p>
+                               @if($product->reviews_avg_rating>0)
+                                    <p class="rating">
+                                        @for($i=1;$i<= $product->reviews_avg_rating;$i++)
+                                            <i class="fas fa-star"></i>
+                                        @endfor
+
+                                        <span>{{$product->reviews_count}}</span>
+                                    </p>
+                                @endif
                                 <a class="title" href="{{ route('product.showDetailes', ['id' => $product->id, 'slug' => $product->slug]) }}">{{$product->name}}</a>
                                 @if($product->offer_price>0)
-                                    <h5 class="price">${{$product->offer_price}}
-                                        <del>{{$product->price}}</del>
+                                    <h5 class="price">{{currencyPosition($product->offer_price)}}
+                                        <del>{{currencyPosition($product->price)}}</del>
                                     </h5>
                                 @else
-                                    <h5 class="price">${{$product->price}}</h5>
+                                    <h5 class="price">{{currencyPosition($product->price)}}</h5>
                                 @endif
 
                                 <ul class="d-flex flex-wrap justify-content-center">
-                                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#cartModal"><i
+                                    <li><a href="#" onclick="loadidpopup({{$product->id}})" data-bs-toggle="modal" data-bs-target="#cartModal"><i
                                                 class="fas fa-shopping-basket"></i></a></li>
-                                    <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
+                                    <li onclick="addToWishList({{$product->id}})" ><a   href="javascript:;"><i class="fal fa-heart"></i></a></li>
+                                    <li><a href="{{ route('product.showDetailes', ['id' => $product->id, 'slug' => $product->slug]) }}"><i class="far fa-eye"></i></a></li>
                                 </ul>
                             </div>
                         </div>
