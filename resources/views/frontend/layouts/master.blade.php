@@ -213,6 +213,7 @@
     SCROLL BUTTON END
 ==============================-->
 <script src="{{URL::asset('frontend/assets/js/bootstrap-iconpicker.bundle.min.js')}}"></script>
+<script src="{{URL::asset('resources/js/app.js')}}"></script>
 
 
 <!--jquery library js-->

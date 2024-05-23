@@ -125,134 +125,133 @@
 @endsection
 
 
-
-
-
 @push('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         $(document).ready(function (){
             $('.decrement').on('click',function (e){
-                e.preventDefault()
-                let Quantity = $(this).siblings('.quantity')
-                let currentQuantity = parseFloat(Quantity.val())
-                let rowId = Quantity.data("id")
-                Quantity.val(currentQuantity+1)
-                let QuanValue = Quantity.val()
-                updateTotal(rowId,QuanValue,function (response){
+                e.preventDefault();
+                let Quantity = $(this).siblings('.quantity');
+                let currentQuantity = parseFloat(Quantity.val());
+                let rowId = Quantity.data("id");
+                Quantity.val(currentQuantity+1);
+                let QuanValue = Quantity.val();
+                updateTotal(rowId, QuanValue, function (response){
                     if(response.status == "errors"){
-                        Quantity.val(response.quantity)
-                        toastr.error(response.message)
+                        Quantity.val(response.quantity);
+                        toastr.error(response.message);
                     }
                     let productTotal = response.total;
-                    console.log(response.global_total)
-                    let formatedTotal = '{{currencyPosition(":productTotal")}}'.replace(':productTotal',productTotal)
+                    let formatedTotal = '{{currencyPosition(":productTotal")}}'.replace(':productTotal',productTotal);
                     Quantity.closest("tr")
                         .find(".total")
-                        .text(`${formatedTotal}`)
+                        .text(`${formatedTotal}`);
                     let subtotal_coupon = $('#subtotal_coupon');
                     subtotal_coupon.text(`${formatedTotal}`);
                     let total_coupon = $('#total_coupon');
                     total_coupon.text(`${formatedTotal}`);
-                })
+                });
+            });
 
-
-            })
             $('.increment').on('click',function (e){
-                e.preventDefault()
-                let Quantity = $(this).siblings('.quantity')
-                let currentQuantity = parseFloat(Quantity.val())
-                let rowId = Quantity.data("id")
+                e.preventDefault();
+                let Quantity = $(this).siblings('.quantity');
+                let currentQuantity = parseFloat(Quantity.val());
+                let rowId = Quantity.data("id");
                 if (currentQuantity>1){
-                    Quantity.val(currentQuantity-1)
-                    let QuanValue = Quantity.val()
-                    updateTotal(rowId,QuanValue,function (response){
+                    Quantity.val(currentQuantity-1);
+                    let QuanValue = Quantity.val();
+                    updateTotal(rowId, QuanValue, function (response){
                         let productTotal = response.total;
-                        console.log(response.global_total)
-
-                        let formatedTotal = '{{currencyPosition(":productTotal")}}'.replace(':productTotal',productTotal)
+                        let formatedTotal = '{{currencyPosition(":productTotal")}}'.replace(':productTotal',productTotal);
                         Quantity.closest("tr")
                             .find(".total")
-                            .text(`${formatedTotal}`)
+                            .text(`${formatedTotal}`);
                         let subtotal_coupon = $('#subtotal_coupon');
                         subtotal_coupon.text(`${formatedTotal}`);
                         let total_coupon = $('#total_coupon');
                         total_coupon.text(`${formatedTotal}`);
-
-
-                    })
-
-                }
-            })
-        })
-
-
-        function updateTotal(id,qty,callback){
-            $.ajax({
-                method:'POST',
-                url:'{{route("cart.update-quantity")}}',
-                data:{
-                    'rowId':id,
-                    'qty':qty
-                },
-                beforeSend:function (){
-                    showLoader()
-                },
-                success:function (response){
-                    hideLoader()
-
-                    if(callback && typeof callback ==='function'){
-                    callback(response)
-                }
-
-                },
-                error:function (){
-
-                },
-                complete:function (){
-                  hideLoader()
-                }
-
-            })
-        }
-
-
-        $('#coupon_form').on('submit', function (e) {
-            e.preventDefault();
-            let coupon = $('#coupon_code').val();
-            let subtotal = $('#total_coupon').text();
-            coupon_form(coupon, subtotal);
-        });
-
-        function coupon_form(coupon, subtotal) {
-            $.ajax({
-                method: "POST",
-                url: "{{ route('admin.getCoupon') }}",
-                data: {
-                    'coupon': coupon,
-                    'subtotal': subtotal
-                },
-                beforeSend: function () {
-
-                },
-                success: function (response) {
-                    let total_coupon = $('#total_coupon');
-                    let Discount_Total = $('#Discount_total');
-                    let formatedTotal = currencyPosition(response.finalTotal);
-                    let DiscountTotal = currencyPosition(response.discount);
-                    total_coupon.text(formatedTotal);
-                    Discount_Total.text(DiscountTotal);
-                },
-                complete: function () {
-                    // Actions to take regardless of success or failure
-                },
-                error: function (xhr, status, error) {
-                    // Actions to take if AJAX request encounters an error
+                    });
                 }
             });
-        }
 
+            $('#coupon_form').on('submit', function (e) {
+                e.preventDefault();
+                let coupon = $('#coupon_code').val();
+                let subtotal = $('#total_coupon').text();
+                applyCoupon(coupon, subtotal);
+            });
 
+            function updateTotal(id,qty,callback){
+                $.ajax({
+                    method:'POST',
+                    url:'{{route("cart.update-quantity")}}',
+                    data:{
+                        'rowId':id,
+                        'qty':qty
+                    },
+                    beforeSend:function (){
+                        showLoader();
+                    },
+                    success:function (response){
+                        hideLoader();
+
+                        if(callback && typeof callback ==='function'){
+                            callback(response);
+                        }
+                    },
+                    error:function (){
+                        // Handle error
+                    },
+                    complete:function (){
+                        hideLoader();
+                    }
+                });
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            function applyCoupon(coupon, subtotal) {
+
+                $.ajax({
+                    method: "POST",
+                    url: "{{route('Apply-Coupon')}}",
+                    data: {
+                        'coupon': coupon,
+                        'subtotal': subtotal
+                    },
+                    beforeSend: function () {
+                        $('#coupon_button').attr('disabled', true);
+                        showLoader();
+                    },
+                    success: function (response) {
+                        let total_coupon = $('#total_coupon');
+                        let Discount_Total = $('#Discount_total');
+                        let formatedTotal = '{{currencyPosition(":total")}}'.replace(':total', response.finalTotal);
+                        let DiscountTotal = '{{currencyPosition(":discount")}}'.replace(':discount', response.discount);
+                        total_coupon.text(formatedTotal);
+                        Discount_Total.text(DiscountTotal);
+                        hideLoader();
+                        $('#coupon_button').attr('disabled', true);
+                    },
+                    error: function (xhr) {
+                        hideLoader();
+                        if (xhr.status === 422) {
+                            toastr.error(xhr.responseJSON.message);
+                        }
+                    },
+                    complete: function () {
+                        $('#coupon_button').attr('disabled', true);
+                    }
+                });
+
+            }
+
+        });
     </script>
-
-
 @endpush

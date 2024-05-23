@@ -24,11 +24,20 @@ class AccountManagementSystemDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query){
-                $edit = "<a class='btn btn-success btn-sm  ' href='".route('admin.AccountManagement.edit',$query->id)."'><i class='far fa-edit'></i></a>";
-                $delete = "<a class='btn btn-icon btn-danger text-white m-2' data-toggle='modal'  data-target='#modaldemo9' data-del='{{ $query->id }}'>
+                $edit = '';
+                $delete = '';
+                if (\Gate::allows('Account Management-edit')) {
+                    $edit = "<a class='btn btn-success btn-sm  ' href='".route('admin.AccountManagement.edit',$query->id)."'><i class='far fa-edit'></i></a>";
+
+
+                }
+                if (\Gate::allows('Account Management-delete')) {
+                    $delete = "<a class='btn btn-icon btn-danger text-white m-2' data-toggle='modal'  data-target='#modaldemo9' data-del='{{ $query->id }}'>
                             <i class='fa fa-trash' aria-hidden='true'>
                             </i>
                             </a>";
+                }
+
                 return $edit.$delete;
             })
             ->addColumn('created_at',function ($query){

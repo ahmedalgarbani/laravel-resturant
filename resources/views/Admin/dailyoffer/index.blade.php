@@ -13,6 +13,7 @@
                 </div>
                 <div class="card-body">
                     <div id="accordion">
+                        @can('Daily Offer-show-title')
                         <div class="accordion">
                             <div class="accordion-header collapsed" role="button" data-toggle="collapse" data-target="#panel-body-1" aria-expanded="false">
                                 <h4>edit section title</h4>
@@ -36,12 +37,15 @@
                                        <input class="form-control " name="sub_title"
                                               type="text" value="{{ @$titles['dailyoffer_sub_title']}}" >
                                    </div>
+                                   @can('Daily Offer-update-title')
                                    <div class="mt-5 d-flex justify-content-center">
                                        <button type="submit" class="btn btn-primary"> SAVE</button>
                                    </div>
+                                   @endcan
                                </form>
                             </div>
                         </div>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -50,9 +54,11 @@
             <div class="card-header">
                 <h4>DailyOffer Header</h4>
                 <div class="card-header-action">
+                    @can('Daily Offer-create')
                     <a href="{{route('admin.dailyoffer.create')}}" class="btn btn-primary">
                         create one
                     </a>
+                    @endcan
                 </div>
             </div>
             <div class="card-body myTable">

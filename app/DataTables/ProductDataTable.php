@@ -24,10 +24,18 @@ class ProductDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query){
-                $edit = "<a class='btn btn-success btn-sm  ' href='".route('admin.product.edit',$query->id)."'> <i class='far fa-edit'></i></a>";
-                $delete = "<a class='btn btn-icon btn-danger text-white m-2' data-toggle='modal'  data-target='#modaldemo9' data-del='{{ $query->id }}'>حذف</a>" ;
-                $sitting = "<a class='btn btn-dark btn-sm text-white m-2' >gallay</a>" ;
-                $setting = '<div class="dropdown d-inline">
+//                $sitting = "<a class='btn btn-dark btn-sm text-white m-2' >gallay</a>" ;
+
+                $edit = '';
+                $delete = '';
+                $setting = '';
+                if (\Gate::allows('product-edit')) {
+
+                    $edit = "<a class='btn btn-success btn-sm  ' href='".route('admin.product.edit',$query->id)."'> <i class='far fa-edit'></i></a>";
+
+                }
+                if (\Gate::allows('product Option-show')) {
+                    $setting = '<div class="dropdown d-inline">
                       <button class="btn btn-icon btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-info-circle"></i>
                       </button>
@@ -36,6 +44,14 @@ class ProductDataTable extends DataTable
                         <a class="dropdown-item has-icon"  href="'.route("admin.product.size",$query->id).'" ><i class="far fa-file"></i> Size </a>
                       </div>
                     </div>';
+
+                }
+                if (\Gate::allows('product-delete')) {
+
+                    $delete = "<a class='btn btn-icon btn-danger text-white m-2' data-toggle='modal'  data-target='#modaldemo9' data-del='{{ $query->id }}'>حذف</a>" ;
+                }
+
+
                 return $edit.$delete.$setting;
             })->addColumn('image',function ($query){
                 return "<img src='".asset($query->thumb_image)."' width='100px'/>";

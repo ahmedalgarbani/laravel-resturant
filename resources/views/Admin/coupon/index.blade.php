@@ -9,9 +9,11 @@
             <div class="card-header">
                 <h4>Coupon Header</h4>
                 <div class="card-header-action">
+                    @can('Coupon-create')
                     <a href="{{route('admin.coupon.create')}}" class="btn btn-primary">
                         create one
                     </a>
+                    @endcan
                 </div>
             </div>
             <div class="card-body myTable">

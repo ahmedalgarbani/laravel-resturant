@@ -35,9 +35,9 @@
                         <div class="col-6">
                             <label for="inputName" class="control-label"> Role</label>
                             <select name="role" class="form-control SlectBox"  >
-                                <option value="user"> User</option>
-                                <option value="admin"> Admin</option>
-                                <option value="super admin"> Super Admin</option>
+                                @foreach($roles as $role)
+                                <option value="{{$role->name}}">{{$role->name}}</option>
+                                @endforeach
 
                             </select>
                         </div>

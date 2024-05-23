@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Chef Create</h1>
+            <h1>App Download</h1>
         </div>
         <div class="card card-primary">
 
@@ -72,11 +72,11 @@
 
                     <br>
 
-
+@can('App Download-edit')
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary"> SAVE</button>
                     </div>
-
+@endcan
 
                 </form>
 

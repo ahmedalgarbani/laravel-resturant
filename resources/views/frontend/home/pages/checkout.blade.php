@@ -47,87 +47,84 @@
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form>
+                                                <form action="{{route('address.store')}}" method="POST">
+                                                    @csrf
+                                                    @method('POST')
                                                     <div class="row">
-                                                        <div class="col-md-6 col-lg-12 col-xl-6">
-                                                            <div class="fp__check_single_form">
-                                                                <input type="text" placeholder="First Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 col-lg-12 col-xl-6">
-                                                            <div class="fp__check_single_form">
-                                                                <input type="text" placeholder="Last Name">
-                                                            </div>
+                                                        <div class="col-12">
+                                                            <h4>add new address</h4>
                                                         </div>
                                                         <div class="col-md-12 col-lg-12 col-xl-12">
                                                             <div class="fp__check_single_form">
-                                                                <input type="text"
-                                                                       placeholder="Company Name (Optional)">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 col-lg-12 col-xl-6">
-                                                            <div class="fp__check_single_form">
-                                                                <select id="select_js4">
-                                                                    <option value="">select country</option>
-                                                                    <option value="">bangladesh</option>
-                                                                    <option value="">nepal</option>
-                                                                    <option value="">japan</option>
-                                                                    <option value="">korea</option>
-                                                                    <option value="">thailand</option>
+                                                                <select name="area" id="select_js3">
+                                                                    <option value="">select Area</option>
+                                                                    @foreach($delivery_area as $delivery)
+                                                                        <option value="{{$delivery->id}}">{{$delivery->area_name}}</option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-lg-12 col-xl-6">
                                                             <div class="fp__check_single_form">
-                                                                <input type="text" placeholder="Street Address *">
+                                                                <input type="text" value="{{old('first_name')}}" name="first_name"  placeholder="First Name">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-lg-12 col-xl-6">
                                                             <div class="fp__check_single_form">
-                                                                <input type="text"
-                                                                       placeholder="Apartment, suite, unit, etc. (optional)">
+                                                                <input type="text" value="{{old('last_name')}}" name="last_name" placeholder="Last Name">
                                                             </div>
                                                         </div>
+
+
                                                         <div class="col-md-6 col-lg-12 col-xl-6">
                                                             <div class="fp__check_single_form">
-                                                                <input type="text" placeholder="Town / City *">
+                                                                <input type="email" value="{{old('email')}}" name="email" placeholder="email">
                                                             </div>
                                                         </div>
+
                                                         <div class="col-md-6 col-lg-12 col-xl-6">
                                                             <div class="fp__check_single_form">
-                                                                <input type="text" placeholder="State *">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 col-lg-12 col-xl-6">
-                                                            <div class="fp__check_single_form">
-                                                                <input type="text" placeholder="Zip *">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 col-lg-12 col-xl-6">
-                                                            <div class="fp__check_single_form">
-                                                                <input type="text" placeholder="Phone *">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 col-lg-12 col-xl-6">
-                                                            <div class="fp__check_single_form">
-                                                                <input type="email" placeholder="Email *">
+                                                                <input type="text" value="{{old('phone')}}" name="phone"
+                                                                       placeholder="phone">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 col-lg-12 col-xl-12">
                                                             <div class="fp__check_single_form">
-                                                                <h5>Additional Information</h5>
-                                                                <textarea cols="3" rows="4"
-                                                                          placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+                                                                <textarea cols="3" rows="4" name="address"
+                                                                          placeholder="Address"></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
-                                                            <div class="fp__check_single_form m-0">
-                                                                <button type="submit" class="common_btn">add
-                                                                    address</button>
+                                                            <div class="fp__check_single_form check_area">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                           value="home"
+                                                                           name="type" id="flexRadioDefault1">
+                                                                    <label class="form-check-label"
+                                                                           for="flexRadioDefault1">
+                                                                        home
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                           name="type" value="office"
+                                                                           id="flexRadioDefault2">
+                                                                    <label class="form-check-label"
+                                                                           for="flexRadioDefault2">
+                                                                        office
+                                                                    </label>
+                                                                </div>
                                                             </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <button type="button"
+                                                                    class="common_btn cancel_new_address">cancel</button>
+                                                            <button type="submit" class="common_btn">save
+                                                                address</button>
                                                         </div>
                                                     </div>
                                                 </form>
+
                                             </div>
                                         </div>
                                     </div>
@@ -167,13 +164,15 @@
                     <div id="sticky_sidebar" class="fp__cart_list_footer_button">
                         <h6>total cart</h6>
                         <p>subtotal: <span>{{currencyPosition(GlobalTotal())}}</span></p>
-                        <p>delivery: <span id="delivery_fee">$00.00</span></p>
-                        <p>discount: <span>{{currencyPosition(0)}}</span></p>
-                        <p class="total"><span>total:</span> <span id="grand_total">{{currencyPosition(GlobalTotal())}}</span></p>
-                        <form>
-                            <input type="text" placeholder="Coupon Code">
-                            <button type="submit">apply</button>
-                        </form>
+                        <p>delivery: <span id="delivery_fee" data-price="0">$00.00</span></p>
+                        <p>discount: <span>{{@currencyPosition(0.0)}}</span></p>
+                        <p class="total"><span>total:</span> <span id="grand_total">{{@currencyPosition(GlobalTotal())}}</span></p>
+                        @if(session()->get('coupon'))
+                            <p>discount: <span>{{@currencyPosition(session()->get('coupon')['discount'])}}</span></p>
+
+                            <p class="total"><span>total:</span> <span id="grand_total">{{@currencyPosition(session()->get('coupon')['finalTotal'])}}</span></p>
+
+                        @endif
                         <a class="common_btn" id="proccess_to_payment" href=" #">proccess to Payment</a>
                     </div>
                 </div>
@@ -201,6 +200,7 @@
                     showLoader()
                     },
                     success:function (response){
+                        console.log(response)
                     deliveryFee.text("{{currencyPosition(':amount')}}"
                         .replace(":amount",response.delivery_fee))
 

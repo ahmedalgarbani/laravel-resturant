@@ -17,7 +17,7 @@
                     <div class="col-12 col-sm-6 col-lg-4 " style="hight:100vh">
                         <div class="card">
                             <div class="card-body">
-                                <ul class="list-unstyled list-unstyled-border">
+                                <ul class="list-unstyled list-unstyled-border" id="userOnline">
                                     @foreach($chatUsers as $chatUser)
                                     <li class="media fp_chat_user" data-user="{{$chatUser->id}}" style="cursor: pointer">
                                         <img alt="image" class="mr-3 rounded-circle" width="50" src="{{asset($chatUser->avatar)}}" style="object-fit: cover">
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6 col-lg-8">
+                    <div class="col-12 col-sm-6 col-lg-8" id="userChating">
                         <div class="card chat-box" id="mychatbox" style="hight:100vh">
                             <div class="card-header">
                                 <h4>Chat with Rizal</h4>
@@ -58,6 +58,7 @@
 
 @endsection
 @push('scripts')
+
     <script>
         $(document).ready(function (){
             var userId = "{{auth()->user()->id}}"

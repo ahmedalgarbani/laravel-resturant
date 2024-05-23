@@ -13,6 +13,7 @@
                 <h4>Add image</h4>
             </div>
             <div class="card-body myTable">
+                @can('product Gallary-create')
                 <form action="{{route('admin.gallary.store')}}" method="POST" enctype="multipart/form-data">
                     @method('POST')
 
@@ -26,7 +27,8 @@
                     <button type="submit" class="btn btn-primary"> send </button>
                 </div>
                 </form>
-            </div>
+                @endcan
+           </div>
         </div>
 
     </section>
@@ -38,6 +40,7 @@
             <div class="card-header">
 
             </div>
+            @can('product Gallary-list')
             <div class="card-body myTable">
                 <div class="table-responsive">
                     <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -80,7 +83,7 @@
 
                     </div>
                 </div>
-
+            @endcan
             </div>
         </div>
 

@@ -102,12 +102,10 @@ class CouponController extends Controller
 
 
 
-    public function getCoupon(Request $request){
+    public function applyCoupon(Request $request)  {
         preg_match('/\d+/', $request->subtotal, $matches);
         $subtotal = $matches[0];
         $code = $request->coupon;
-
-
 
         $discount = 0;
         $coupon = Coupon::where('code', $code)->where('status', 1)->first();
@@ -126,14 +124,16 @@ class CouponController extends Controller
             $discount = $coupon->discount;
         }
 
-
         $finalTotal = $subtotal - $discount;
         session()->put('coupon', [
             'finalTotal' => $finalTotal,
             'discount' => $discount,
+            'coupon'=>$coupon->code
         ]);
         return response()->json(['message'=>'Coupon applied successfully.', 'finalTotal'=>$finalTotal, 'discount'=>$discount], 200);
     }
+
+
 
 
 

@@ -30,5 +30,6 @@ class OrderPaymentUpdateListener
         $order->transaction_id = $event->paymentInfo['transaction_id'];
         $order->currency_name = $event->paymentInfo['currency'];
         $order->save();
+
     }
 }

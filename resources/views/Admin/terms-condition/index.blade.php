@@ -30,7 +30,9 @@
 
 
                     <div class="d-flex justify-content-center">
+                        @can('Terms Condition-edit')
                         <button type="submit" class="btn btn-primary"> SAVE</button>
+                        @endcan
                     </div>
 
 

@@ -23,8 +23,18 @@ class BannerSliderDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query){
-                $edit = "<a class='btn btn-success btn-sm  ' href='".route('admin.banner-slider.edit',$query->id)."'><i class='far fa-edit'></i></a>";
-                $delete = "<a class='btn btn-icon btn-danger text-white m-2' data-toggle='modal'  data-target='#modaldemo9' data-del='{{ $query->id }}'>حذف</a>" ;
+
+                $edit = '';
+                $delete = '';
+                if (\Gate::allows('Bunner Slider-edit')) {
+                    $edit = "<a class='btn btn-success btn-sm  ' href='".route('admin.banner-slider.edit',$query->id)."'><i class='far fa-edit'></i></a>";
+
+
+                }
+                if (\Gate::allows('Bunner Slider-delete')) {
+                    $delete = "<a class='btn btn-icon btn-danger text-white m-2' data-toggle='modal'  data-target='#modaldemo9' data-del='{{ $query->id }}'>حذف</a>" ;
+
+                }
 
                 return $edit.$delete;
             })->addColumn('image',function ($query){

@@ -39,7 +39,10 @@
                                         <br>
                                         <br>
                                         <div class="form-group">
-                                            <button class="btn btn-primary" type="submit">Save</button>
+
+                                            @can('Seo Setting-edit')
+                                                <button class="btn btn-primary" type="submit" >Save</button>
+                                            @endcan
                                         </div>
 
                                     </form>

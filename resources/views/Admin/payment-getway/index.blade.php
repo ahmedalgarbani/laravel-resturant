@@ -3,35 +3,41 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Settings</h1>
+            <h1>Payment Getway</h1>
         </div>
         <div class="card card-primary">
             <div class="card-header">
-                <h4>all Settings</h4>
+                <h4>all Payment Way</h4>
             </div>
             <div class="card-body myTable ">
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-2">
                         <ul class="nav nav-pills flex-column" id="myTab4" role="tablist">
+                            @can('Paypal-list')
                             <li class="nav-item">
-                                <a class="nav-link active" id="home-tab4" data-toggle="tab" href="#home4" role="tab" aria-controls="home" aria-selected="true">General Settings</a>
+                                <a class="nav-link active" id="home-tab4" data-toggle="tab" href="#home4" role="tab" aria-controls="home" aria-selected="true">Paypal</a>
                             </li>
+                            @endcan
+                            @can('Stripe-list')
                             <li class="nav-item">
-                                <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                                <a class="nav-link" id="stripe-tab4" data-toggle="tab" href="#stripe" role="tab" aria-controls="stripe" aria-selected="false">Stripe</a>
                             </li>
+                                @endcan
+                                @can('RazorPay-list')
                             <li class="nav-item">
-                                <a class="nav-link" id="contact-tab4" data-toggle="tab" href="#contact4" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                                <a class="nav-link" id="razorpay-tab4" data-toggle="tab" href="#razorpay" role="tab" aria-controls="razorpay" aria-selected="false">RazorPay</a>
                             </li>
+                                @endcan
                         </ul>
                     </div>
                     <div class="col-12 col-sm-12 col-md-10 border-b-2">
                         <div class="tab-content no-padding" id="myTab2Content">
                             @include('Admin.payment-getway.section.paypal')
-                            <div class="tab-pane fade" id="profile4" role="tabpanel" aria-labelledby="profile-tab4">
-                                Sed sed metus vel lacus hendrerit tempus. Sed efficitur velit tortor, ac efficitur est lobortis quis. Nullam lacinia metus erat, sed fermentum justo rutrum ultrices. Proin quis iaculis tellus. Etiam ac vehicula eros, pharetra consectetur dui. Aliquam convallis neque eget tellus efficitur, eget maximus massa imperdiet. Morbi a mattis velit. Donec hendrerit venenatis justo, eget scelerisque tellus pharetra a.
+                            <div class="tab-pane fade" id="stripe" role="tabpanel" aria-labelledby="stripe-tab4">
+                                @include('Admin.payment-getway.section.stripe')
                             </div>
-                            <div class="tab-pane fade" id="contact4" role="tabpanel" aria-labelledby="contact-tab4">
-                                Vestibulum imperdiet odio sed neque ultricies, ut dapibus mi maximus. Proin ligula massa, gravida in lacinia efficitur, hendrerit eget mauris. Pellentesque fermentum, sem interdum molestie finibus, nulla diam varius leo, nec varius lectus elit id dolor. Nam malesuada orci non ornare vulputate. Ut ut sollicitudin magna. Vestibulum eget ligula ut ipsum venenatis ultrices. Proin bibendum bibendum augue ut luctus.
+                            <div class="tab-pane fade" id="razorpay" role="tabpanel" aria-labelledby="razorpay-tab4">
+                                @include('Admin.payment-getway.section.razorpay')
                             </div>
                         </div>
                     </div>

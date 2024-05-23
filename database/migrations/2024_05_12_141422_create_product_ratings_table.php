@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('rating');
             $table->text('review');
             $table->boolean('status');
-            $table->boolean('isBuy');
+            $table->boolean('isBuyTrait');
             $table->timestamps();
         });
     }

@@ -45,6 +45,11 @@ class SettingController extends Controller
         return view('admin.settings.seo_Setting');
     }
 
+    public function notify_Setting()
+    {
+        return view('admin.settings.notification');
+    }
+
 
 
     public function updateSettings(Request $request)
@@ -170,6 +175,32 @@ class SettingController extends Controller
         $settingCache->clearCachedSettings();
 
         toastr()->success('Settings updated successfully');
+
+        return redirect()->back();
+    }
+
+    public function notifySetting(Request $request){
+
+        $validateRequest = $request->validate([
+            'pusher_app_id' => ['nullable'],
+            'pusher_key' => ['nullable'],
+            'pusher_secret' => ['nullable'],
+            'pusher_cluster' => ['nullable'],
+        ]);
+
+        foreach ($validateRequest as $key => $value){
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
+        }
+
+
+
+        $settingCache = app(SettingService::class);
+        $settingCache->clearCachedSettings();
+
+        toastr()->success('Notification updated successfully');
 
         return redirect()->back();
     }

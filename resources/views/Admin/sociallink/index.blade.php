@@ -9,10 +9,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-header-action d-block mb-1">
+                        @can('Social Link-create')
                         <a href="{{route('admin.socail-link.create')}}" class="btn btn-primary">
                             create new Link
                         </a>
-
+                        @endcan
                         <br>
                     </div>
 

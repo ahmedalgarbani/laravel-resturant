@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\contactMail;
 use App\Models\About;
 use App\Models\ProductRating;
+use App\Trails\isBuyTrait;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AppDownload;
 use App\Models\BannerSlider;
@@ -32,6 +33,7 @@ use function Termwind\render;
 
 class FrontendController extends Controller
 {
+    use isBuyTrait;
     function index(){
 
         $slider = Slider::where('status',1)->get();
@@ -176,46 +178,35 @@ class FrontendController extends Controller
         ]);
 
         if (Auth::check()) {
-            $user = Auth::user();
+            $user = auth()->user()->id;
 
-            $hasPurchased = $user->orders()
-                ->whereHas('orderItems', function ($query) use ($request) {
-                    $query->where('product_id', $request->product_id);
-                })
-                ->where('order_status', 'delivered')
-                ->get();
+//            $hasPurchased = $user->orders()
+//                ->whereHas('orderItems', function ($query) use ($request) {
+//                    $query->where('product_id', $request->product_id);
+//                })
+//                ->where('order_status', 'delivered')
+//                ->get();
 
-
-            if(count($hasPurchased) == 0){
-                $review = new ProductRating();
-                $review->user_id = $user->id;
-                $review->product_id = $request->product_id;
-                $review->rating = $request->rating;
-                $review->review = $request->review;
-                $review->status = 0;
-                $review->isBuy = 0;
-                $review->save();
-                toastr()->success('The comment  is added successfully.');
-                return redirect()->back();
-            }else{
-                $review = new ProductRating();
-                $review->user_id = $user->id;
-                $review->product_id = $request->product_id;
-                $review->rating = $request->rating;
-                $review->review = $request->review;
-                $review->status = 0;
-                $review->isBuy = 1;
-                $review->save();
-                toastr()->success('The comment  is added successfully.');
-                return redirect()->back();
-            }
-
-
-            $alreadyReviewed = ProductRating::where(['user_id'=>$user->id,'product_id'=>$request->product_id])->exists();
+            $alreadyReviewed = ProductRating::where(['user_id'=>$user,'product_id'=>$request->product_id])->exists();
             if($alreadyReviewed){
                 toastr()->success('You are already Reviewd this Product');
                 return redirect()->back();
             }
+
+                $review = new ProductRating();
+                $review->user_id = $user->id;
+                $review->product_id = $request->product_id;
+                $review->rating = $request->rating;
+                $review->review = $request->review;
+                $review->status = 0;
+                $review->isBuy = $this->isUserBuy($request->product_id)?1:0;
+                $review->save();
+                toastr()->success('The comment  is added successfully.');
+                return redirect()->back();
+
+
+
+
 
         } else {
             toastr()->error('Please login to continue.');

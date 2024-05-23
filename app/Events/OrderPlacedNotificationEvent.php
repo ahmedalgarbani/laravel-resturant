@@ -14,7 +14,7 @@ class OrderPlacedNotificationEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public int $orderId;
+    public $orderId;
     /**
      * Create a new event instance.
      */

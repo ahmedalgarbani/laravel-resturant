@@ -60,6 +60,12 @@
                        type="text" >
             </div>
 
+                <div class="form-group">
+                    <label>Paypal App Id </label>
+                    <input class="form-control" value="{{@$paymentGetway['paypal_app_id']}}" name="paypal_app_id"
+                           type="text" >
+                </div>
+
 
             <div class="form-group">
                 <label>Image </label>
@@ -75,7 +81,9 @@
 
             <br>
             <br>            <div class="row flex justify-center " style="justify-content: center">
+                @can('Paypal-edit')
                 <button type="submit" class="btn btn-primary" >Save</button>
+                @endcan
             </div>
         </form>
 

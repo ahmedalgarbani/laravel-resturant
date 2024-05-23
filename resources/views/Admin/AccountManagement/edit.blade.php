@@ -35,9 +35,9 @@
                         <div class="col-6">
                             <label for="inputName" class="control-label"> Role</label>
                             <select name="role" class="form-control SlectBox"  >
-                                <option @if($account->Role == 'user') selected @endif value="user"> User</option>
-                                <option @if($account->Role == 'admin') selected @endif value="admin"> Admin</option>
-                                <option @if($account->Role == 'super admin') selected @endif value="super admin"> Super Admin</option>
+                                @foreach($roles as $role)
+                                    <option @if($account->Role == $role) selected @endif value="{{$role->name}}">{{$role->name}}</option>
+                                @endforeach
 
                             </select>
                         </div>

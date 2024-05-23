@@ -12,10 +12,9 @@ class SettingService
 
     function getSettings(){
         return Cache::rememberForever('settings',function (){
-           return Setting::pluck('value','key')->toArray();
+            return Setting::pluck('value','key')->toArray();
         });
     }
-
 
     function setGlobalSettings(){
         $settings = $this->getSettings();

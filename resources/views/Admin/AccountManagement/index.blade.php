@@ -8,11 +8,13 @@
         <div class="card card-primary">
             <div class="card-header">
                 <h4>All Account</h4>
+                @can('Account Management-create')
                 <div class="card-header-action">
                     <a href="{{route('admin.AccountManagement.create')}}" class="btn btn-primary">
                         create one
                     </a>
                 </div>
+                @endcan
             </div>
             <div class="card-body myTable">
                 {{ $dataTable->table() }}

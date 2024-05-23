@@ -17,6 +17,7 @@
                             <div class="accordion-header collapsed" role="button" data-toggle="collapse" data-target="#panel-body-1" aria-expanded="false">
                                 <h4>Send Custom Message</h4>
                             </div>
+                            @can('News Letter Send Message-list')
                             <div class="accordion-body collapse" id="panel-body-1" data-parent="#accordion" style="">
                                 <form method="POST" action="{{route('admin.SendMessage.newsletter')}}">
                                     @csrf
@@ -36,10 +37,13 @@
                                         </div>
                                     </div>
                                     <div class="mt-5 d-flex justify-content-center">
+                                        @can('News Letter Send Message-send')
                                         <button type="submit" class="btn btn-primary">Send Message</button>
+                                        @endcan
                                     </div>
                                 </form>
                             </div>
+                            @endcan
                         </div>
                     </div>
                 </div>

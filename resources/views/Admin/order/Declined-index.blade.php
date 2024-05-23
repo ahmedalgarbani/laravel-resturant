@@ -61,6 +61,7 @@
                         <form action="" id="form-update-order" method="post">
                             @csrf
                             <input type="hidden" name="id" id="id">
+                            @can('Order Payment Status-list')
                             <div class="form-group">
                                 <label for="">Payment Status</label>
                                 <select class="form-control payment_status" name="payment_status" id="">
@@ -69,6 +70,8 @@
 
                                 </select>
                             </div>
+                            @endcan
+                            @can('Order Status-list')
                             <div class="form-group">
                                 <label for="">Order Status</label>
                                 <select class="form-control order_status" name="order_status" id="">
@@ -78,12 +81,14 @@
                                     <option  value="declined">Declined</option>
                                 </select>
                             </div>
-
+                            @endcan
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    @can('Order Status-update')
                     <button type="submit" class="btn btn-info submit_btn">Save changes</button>
-                    </form>
+                        @endcan
+                        </form>
                 </div>
                 </div>
             </div>

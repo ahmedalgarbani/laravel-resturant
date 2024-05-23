@@ -57,11 +57,11 @@
                         <input class="form-control " name="video_link"
                                type="text" value="{{@$about->video_link}}" >
                     </div>
-
+                @can('About-edit')
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary"> SAVE</button>
                     </div>
-
+                    @endcan
 
                 </form>
 

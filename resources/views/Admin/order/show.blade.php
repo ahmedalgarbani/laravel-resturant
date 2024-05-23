@@ -155,6 +155,7 @@
                                                     <form action="{{route('admin.order.update',$order->id)}}" method="post">
                                                         @method('PUT')
                                                         @csrf
+                                                        @can('Order Payment Status-list')
                                                         <div class="form-group">
                                                             <label for="">Payment Status</label>
                                                             <select class="form-control" name="payment_status" id="">
@@ -163,6 +164,8 @@
 
                                                             </select>
                                                         </div>
+                                                        @endcan
+                                                        @can('Order Status-list')
                                                         <div class="form-group">
                                                             <label for="">Order Status</label>
                                                             <select class="form-control" name="order_status" id="">
@@ -172,7 +175,10 @@
                                                                 <option @if($order->order_status == 'declined') selected @endif value="declined">Declined</option>
                                                             </select>
                                                         </div>
+                                                        @endcan
+                                                        @can('Order Status-update')
                                                         <button type="submit" class="btn btn-info">update</button>
+                                                        @endcan
                                                     </form>
                                                 </div>
                                             </div>

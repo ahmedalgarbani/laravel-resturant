@@ -157,11 +157,11 @@
                     <br>
 
 
-
+@can('Counter-edit')
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary"> SAVE</button>
                     </div>
-
+                    @endcan
 
                 </form>
 

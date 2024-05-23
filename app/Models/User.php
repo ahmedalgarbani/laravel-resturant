@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable , HasRoles ;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'Role',
     ];
 
     /**
@@ -50,6 +53,8 @@ class User extends Authenticatable
     public function chats() {
         return $this->hasMany(Chat::class, 'sender_id','id')->orWhere('receiver_id',$this->id);
     }
+
+
 
     public function orders() {
         return $this->hasMany(Order::class, 'user_id','id');

@@ -8,6 +8,7 @@
         <div class="card card-primary">
             <div class="card">
                 <div class="card-header">
+                    @can('Chef-create')
                     <div class="card-header-action d-block mb-1">
                         <a href="{{route('admin.chef.create')}}" class="btn btn-primary">
                             create one
@@ -15,6 +16,8 @@
 
                         <br>
                     </div>
+                    @endcan
+                    @can('Chef-show-title')
                     <h4>sectionTitle</h4>
                 </div>
                 <div class="card-body">
@@ -42,14 +45,17 @@
                                         <input class="form-control " name="sub_title"
                                                type="text" value="{{ @$titles['chef_sub_title']}}" >
                                     </div>
+                                    @can('Chef-update-title')
                                     <div class="mt-5 d-flex justify-content-center">
                                         <button type="submit" class="btn btn-primary"> SAVE</button>
                                     </div>
+                                    @endcan
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endcan
             </div>
             <div class="card-body myTable">
                 {{ $dataTable->table() }}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\DeliveryArea;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -14,7 +15,9 @@ class CheckoutController extends Controller
     public function index()
     {
         $addresses = Address::where(['user_id'=>auth()->user()->id])->get();
-        return view('frontend.home.pages.checkout',compact('addresses'));
+        $delivery_area = DeliveryArea::where('status',1)->get();
+
+        return view('frontend.home.pages.checkout',compact('addresses','delivery_area'));
     }
 
     public function redirct(Request $request){
@@ -28,6 +31,7 @@ class CheckoutController extends Controller
 
         session()->put('address',$selectedAddress);
         session()->put('address_id',$address->id);
+        session()->put('delivery_area_id',$address->area->id);
 
         session()->put('delivery_fee',$address->area->delivery_fee);
 
@@ -43,8 +47,16 @@ class CheckoutController extends Controller
         try {
             $address = Address::findOrFail($id);
             $deliveryAmount = $address->area->delivery_fee;
-            $grandTotal = GlobalTotal()+$deliveryAmount;
-            return response(['delivery_fee'=>$deliveryAmount,'grand_total'=>$grandTotal],200);
+
+            if(session()->get('coupon')){
+                $grandTotal = session()->get('coupon')['finalTotal']+$deliveryAmount;
+                return response(['delivery_fee'=>$deliveryAmount,'grand_total'=>$grandTotal],200);
+
+            }else{
+                $grandTotal = GlobalTotal()+$deliveryAmount;
+                return response(['delivery_fee'=>$deliveryAmount,'grand_total'=>$grandTotal],200);
+
+            }
         }catch (\Exception $e){
             logger($e);
             return response(['message'=>'something went wronge!'],422);

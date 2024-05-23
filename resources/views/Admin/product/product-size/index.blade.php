@@ -31,13 +31,16 @@
                                     <input type="text" name="price" class="form-control">
                                 </div>
                                 <div class="row m-4">
+                                    @can('product Size-create')
                                     <button type="submit" class="btn btn-primary"> save </button>
+                                    @endcan
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
+            @can('product Size-list')
             <div class="card card-secondary">
                 <section class="section">
                     <div class="section-header">
@@ -96,7 +99,7 @@
 
             </section>
             </div>
-
+            @endcan
         </div>
         <div class="col-12 col-md-6 col-lg-6">
             <div class="card card-primary">
@@ -112,6 +115,7 @@
                             <h4>ADD Size</h4>
                         </div>
                         <div class="card-body myTable">
+                            @can('product Variant-create')
                             <form action="{{route('admin.option.store')}}" method="POST" >
                                 @method('POST')
 
@@ -130,6 +134,7 @@
                                     <button type="submit" class="btn btn-primary"> save </button>
                                 </div>
                             </form>
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -143,6 +148,7 @@
                         <div class="card-header">
 
                         </div>
+                        @can('product Variant-list')
                         <div class="card-body myTable">
                             <div class="table-responsive">
                                 <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -187,7 +193,7 @@
 
                             </div>
                         </div>
-
+                        @endcan
                     </div>
 
                 </section>

@@ -4,9 +4,33 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>Fast Food</title>
-    <!-- General CSS Files -->
+
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
+
+
+        // Enable pusher logging - don't include this in production
+        {{--Pusher.logToConsole = true;--}}
+
+        {{--var pusher = new Pusher("{{config(['broadcasting.connections.pusher.key'])}}", {--}}
+        {{--    cluster: "{{config(['broadcasting.connections.pusher.options.cluster'])}}"??'mt1'--}}
+        {{--});--}}
+
+        {{--var channel = pusher.subscribe('order-placed');--}}
+        {{--channel.bind('RealTimeNotificationEvent', function(data) {--}}
+        {{--    alert(JSON.stringify(data));--}}
+        {{--});--}}
+        let pusherKey = "{{config('settings.pusher_key')}}"
+        let pusherCluster = "{{config('settings.pusher_cluster')}}"
+
+
+
+    </script>
+    @vite(['resources/js/app.js'])
+{{--    <script src="{{ asset('js/app.js') }}" defer> </script>    <!-- General CSS Files -->--}}
     <link rel="stylesheet" href="{{asset('admin/assets/modules/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/modules/fontawesome/css/all.min.css')}}">
+{{--    <link rel="stylesheet" href="{{asset('admin/assets/css/toggle.css')}}">--}}
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{URL::asset('admin/assets/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}">
@@ -151,6 +175,12 @@
             success_callback: null          // Default: null
         });
     </script>
+<script>
+    setInterval(function (){
+        $('#notification_count').load(window.location.href + " #notification_count")
+        $('#notification_task').load(window.location.href + " #notification_task")
+    },1000)
+</script>
 @stack('scripts')
 </body>
 </html>

@@ -43,7 +43,7 @@ class CustomeMailServiceProvider extends ServiceProvider
             config::set('mail.mailers.smtp.encryption', $mailSetting['mail_encryption']);
             config::set('mail.mailers.smtp.username', $mailSetting['mail_username']);
             config::set('mail.mailers.smtp.password', $mailSetting['mail_password']);
-            config::set('mail.from.address', $mailSetting['mail_form_address']); // Corrected config key
+            config::set('mail.from.address', $mailSetting['mail_form_address']);
         }
     }
 }

@@ -9,9 +9,11 @@
             <div class="card-header">
                 <h4>Delivery Header</h4>
                 <div class="card-header-action">
+                    @can('Delivery-create')
                     <a href="{{route('admin.delivery.create')}}" class="btn btn-primary">
                         create one
                     </a>
+                    @endcan
                 </div>
             </div>
             <div class="card-body myTable">

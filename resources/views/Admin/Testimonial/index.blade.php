@@ -3,18 +3,20 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>All Chefs</h1>
+            <h1>All Testimonial</h1>
         </div>
         <div class="card card-primary">
             <div class="card">
                 <div class="card-header">
                     <div class="card-header-action d-block mb-1">
+                        @can('Testimonial-create')
                         <a href="{{route('admin.Testimonial.create')}}" class="btn btn-primary">
                             create one
                         </a>
-
+                        @endcan
                         <br>
                     </div>
+                    @can('Testimonial-show-title')
                     <h4>sectionTitle</h4>
                 </div>
                 <div class="card-body">
@@ -43,13 +45,16 @@
                                                type="text" value="{{ @$titles['Testimonial_sub_title']}}" >
                                     </div>
                                     <div class="mt-5 d-flex justify-content-center">
+                                        @can('Testimonial-update-title')
                                         <button type="submit" class="btn btn-primary"> SAVE</button>
+                                        @endcan
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endcan
             </div>
             <div class="card-body myTable">
                 {{ $dataTable->table() }}

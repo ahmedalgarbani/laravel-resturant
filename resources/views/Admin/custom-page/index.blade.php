@@ -9,9 +9,11 @@
             <div class="card-header">
                 <h4>All Custom Pages</h4>
                 <div class="card-header-action">
+                    @can('Custom Page-create')
                     <a href="{{route('admin.custom-page.create')}}" class="btn btn-primary">
                         create one
                     </a>
+                    @endcan
                 </div>
             </div>
             <div class="card-body myTable">

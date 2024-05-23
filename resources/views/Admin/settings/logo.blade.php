@@ -65,7 +65,10 @@
                                         <br>
                                         <br>
                                         <div class="form-group">
-                                            <button class="btn btn-primary" type="submit">Save</button>
+
+                                            @can('Logo Setting-edit')
+                                                <button class="btn btn-primary" type="submit" >Save</button>
+                                            @endcan
                                         </div>
 
                                     </form>

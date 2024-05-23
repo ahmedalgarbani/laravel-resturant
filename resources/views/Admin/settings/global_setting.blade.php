@@ -57,7 +57,10 @@
                                         <br>
 
                                         <div class="row flex justify-center " style="justify-content: center">
-                                            <button type="submit" class="btn btn-primary" >Save</button>
+
+                                            @can('Global Setting-edit')
+                                                <button class="btn btn-primary" type="submit" >Save</button>
+                                            @endcan
                                         </div>
                                     </form>
 

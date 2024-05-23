@@ -24,9 +24,14 @@ class SliderDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query){
-                $edit = "<a class='btn btn-success btn-sm  ' href='".route('admin.slider.edit',$query->id)."'><i class='far fa-edit'></i></a>";
-                $delete = "<a class='btn btn-icon btn-danger text-white m-2' data-toggle='modal'  data-target='#modaldemo9' data-del='{{ $query->id }}'>حذف</a>" ;
-
+                $edit ='';
+                $delete = '';
+                if (\Gate::allows('Slider Home-edit')) {
+                    $edit = "<a class='btn btn-success btn-sm  ' href='" . route('admin.slider.edit', $query->id) . "'><i class='far fa-edit'></i></a>";
+                }
+                if (\Gate::allows('Slider Home-delete')) {
+                    $delete = "<a class='btn btn-icon btn-danger text-white m-2' data-toggle='modal'  data-target='#modaldemo9' data-del='{{ $query->id }}'>حذف</a>";
+                }
                 return $edit.$delete;
             })->addColumn('image',function ($query){
                 return "<img src='".asset($query->image)."' width='100px'/>";

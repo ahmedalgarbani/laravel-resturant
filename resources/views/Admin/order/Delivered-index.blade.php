@@ -61,28 +61,33 @@
                         <form action="" id="form-update-order" method="post">
                             @csrf
                             <input type="hidden" name="id" id="id">
-                            <div class="form-group">
-                                <label for="">Payment Status</label>
-                                <select class="form-control payment_status" name="payment_status" id="">
-                                    <option  value="pending">Pending</option>
-                                    <option  value="completed">Completed</option>
+                            @can('Order Payment Status-list')
+                                <div class="form-group">
+                                    <label for="">Payment Status</label>
+                                    <select class="form-control payment_status" name="payment_status" id="">
+                                        <option  value="pending">Pending</option>
+                                        <option  value="completed">Completed</option>
 
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Order Status</label>
-                                <select class="form-control order_status" name="order_status" id="">
-                                    <option  value="pending">Pending</option>
-                                    <option  value="in_proccess">In Proccess</option>
-                                    <option  value="delivered">Delivered</option>
-                                    <option  value="declined">Declined</option>
-                                </select>
-                            </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-info submit_btn">Save changes</button>
+                                    </select>
+                                </div>
+                            @endcan
+                            @can('Order Status-list')
+                                <div class="form-group">
+                                    <label for="">Order Status</label>
+                                    <select class="form-control order_status" name="order_status" id="">
+                                        <option  value="pending">Pending</option>
+                                        <option  value="in_proccess">In Proccess</option>
+                                        <option  value="delivered">Delivered</option>
+                                        <option  value="declined">Declined</option>
+                                    </select>
+                                </div>
+                        @endcan
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        @can('Order Status-update')
+                            <button type="submit" class="btn btn-info submit_btn">Save changes</button>
+                            @endcan
                     </form>
                 </div>
                 </div>

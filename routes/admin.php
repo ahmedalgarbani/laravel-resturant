@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AppDownloadController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\ChefController;
+use App\Http\Controllers\Admin\ClearDatabaseController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\CustomPageController;
@@ -30,10 +31,11 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\whyChooseUsController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\BannerSliderController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::group(['prefix'=>'admin','as'=>'admin.'],function (){
+Route::group(['prefix'=>'admin','as'=>'admin.','role:Admin'],function (){
     Route::get('dashboard',[\App\Http\Controllers\Admin\AdminController::class,'index'])->name('dashboard');
     Route::get('profile',[ProfileController::class,'index'])->name('profile');
     Route::put('profile',[ProfileController::class,'updateInformation'])->name('profile.update');
@@ -133,7 +135,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.'],function (){
 
 
 
-
+   /** Clear DataBase  */
+    Route::get('clear-database',[ClearDatabaseController::class,'index'])->name('wipeDatabase.index');
+    Route::get('clearDB',[ClearDatabaseController::class,'clearDB'])->name('clearDB');
 
 
 
@@ -184,11 +188,13 @@ Route::group(['prefix'=>'admin','as'=>'admin.'],function (){
      Route::get('setting-logo',[SettingController::class,'logo'])->name('logo.index');
      Route::get('setting-appearance',[SettingController::class,'appearance'])->name('appearance.index');
      Route::get('setting-seo_setting',[SettingController::class,'seo_Setting'])->name('seo_setting.index');
+     Route::get('setting-notify',[SettingController::class,'notify_Setting'])->name('notify-pusher.index');
 
      Route::post('setting-update',[SettingController::class,'updateSettings'])->name('setting.update');
      Route::put('logo-setting',[SettingController::class,'logoSetting'])->name('logo-update');
      Route::put('colortheme-setting',[SettingController::class,'apperiance'])->name('apperiance-update');
      Route::put('seo_Setting-setting',[SettingController::class,'seoSetting'])->name('seoSetting-update');
+     Route::put('notify-pusher-setting',[SettingController::class,'notifySetting'])->name('notify-pusher.update');
     ////-------Global Settings-----//
 
 
@@ -198,10 +204,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.'],function (){
     Route::post('mail-update',[SettingController::class,'updateMailSetting'])->name('mail-pusher.setting');
 
 
-     /** Mail Setting */
-
-
-
+     /** Spatie Permission */
+    Route::resource('roles', RoleController::class);
+    Route::put('role', [RoleController::class,'update'])->name('role.update');
 
     /*
  |--------------------------------------------------------------------------
@@ -237,6 +242,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.'],function (){
 
     Route::get('payment-getway',[PaymentGetwayController::class,'index'])->name('payment-getway.index');
     Route::put('payment-getway-update',[PaymentGetwayController::class,'paypalSettingUpdate'])->name('payment-getway.update');
+    Route::put('stripe-getway-update',[PaymentGetwayController::class,'stripeSettingUpdate'])->name('stripe-getway.update');
+    Route::put('razorpay-getway-update',[PaymentGetwayController::class,'razorpaySettingUpdate'])->name('razorpay-getway.update');
 
 
 
@@ -283,8 +290,12 @@ Route::group(['prefix'=>'admin','as'=>'admin.'],function (){
 */
 
     Route::post('category',[CategoryController::class,'store'])->name('category.store');
+    /** Marks As Read*/
+    Route::get('read-All-notification',[\App\Http\Controllers\Admin\AdminController::class,'markAsRead'])
+        ->name('marksAsRead');
+
+
 });
-Route::post('getCoupon',[CouponController::class,'getCoupon'])->name('admin.getCoupon');
 
 
 

@@ -28,12 +28,16 @@ class OrderDataTable extends DataTable
                 return date('y-m-d',strtotime($query->created_at));
             })
             ->addColumn('payment_status',function ($query){
-                if(strtoupper($query->payment_status) == 'COMPLETED'){
-                    return '<span class="badge badge-success">COMPLETED</span>';
-                }elseif (strtoupper($query->payment_status) == 'pending'){
-                    return '<span class="badge badge-warning">pending</span>';
-                }else{
-                    return '<span class="badge badge-danger">'.$query->payment_status.'</span>';
+                $status = strtoupper($query->payment_status);
+
+                switch ($status) {
+                    case 'COMPLETED':
+                    case 'COMPLETE':
+                        return '<span class="badge badge-success">COMPLETED</span>';
+                    case 'PENDING':
+                        return '<span class="badge badge-warning">pending</span>';
+                    default:
+                        return '<span class="badge badge-danger">' . $query->payment_status . '</span>';
                 }
             })
             ->addColumn('order_status',function ($query){
@@ -47,9 +51,26 @@ class OrderDataTable extends DataTable
             })
 
             ->addColumn('action', function ($query){
-                $view = "<a class='btn btn-primary btn-sm ml-2  ' href='".route('admin.order.show',$query->id)."'><i class='fas fa-eye'></i></a>";
-                $status = "<a class='btn btn-warning ml-2 btn-sm  order_status' data-toggle='modal' data-target='#order_model' data-id='{{$query->id}}' href='javascript:;'><i class='fas fa-truck-loading'></i></a>";
-                $delete = "<a class='btn btn-icon btn-danger text-white m-2' data-toggle='modal'  data-target='#modaldemo9' data-del='{{ $query->id }}'><i class='fas fa-trash'></i></a>" ;
+
+                $status = '';
+                $delete = '';
+                $view = '';
+
+                if (\Gate::allows('Order Detaile-list')) {
+
+                    $view = "<a class='btn btn-primary btn-sm ml-2  ' href='".route('admin.order.show',$query->id)."'><i class='fas fa-eye'></i></a>";
+
+                }
+                if (\Gate::allows('Order Update-list')) {
+
+                    $status = "<a class='btn btn-warning ml-2 btn-sm  order_status' data-toggle='modal' data-target='#order_model' data-id='{{$query->id}}' href='javascript:;'><i class='fas fa-truck-loading'></i></a>";
+                }
+                if (\Gate::allows('Order-delete')) {
+
+                    $delete = "<a class='btn btn-icon btn-danger text-white m-2' data-toggle='modal'  data-target='#modaldemo9' data-del='{{ $query->id }}'><i class='fas fa-trash'></i></a>" ;
+                }
+
+
 
                 return $view.$status.$delete;
             })

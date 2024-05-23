@@ -8,11 +8,13 @@
         <div class="card card-primary">
             <div class="card-header">
                 <h4>Banner Slider</h4>
-                <div class="card-header-action">
-                    <a href="{{route('admin.banner-slider.create')}}" class="btn btn-primary">
-                        create one
-                    </a>
-                </div>
+               @can('Bunner Slider-create')
+                    <div class="card-header-action">
+                        <a href="{{route('admin.banner-slider.create')}}" class="btn btn-primary">
+                            create one
+                        </a>
+                    </div>
+                   @endcan
             </div>
             <div class="card-body myTable">
                 {{ $dataTable->table() }}

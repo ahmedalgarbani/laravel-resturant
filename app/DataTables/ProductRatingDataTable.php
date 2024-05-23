@@ -23,10 +23,15 @@ class ProductRatingDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query){
-                $delete = "<a class='btn btn-icon btn-danger text-white m-2' data-toggle='modal'  data-target='#modaldemo9' data-del='{{ $query->id }}'>
+                $delete = '';
+                if (\Gate::allows('Product Review-delete')) {
+                    $delete = "<a class='btn btn-icon btn-danger text-white m-2' data-toggle='modal'  data-target='#modaldemo9' data-del='{{ $query->id }}'>
                             <i class='fa fa-trash' aria-hidden='true'>
                             </i>
                             </a>";
+
+                }
+
                 return $delete;
             })
             ->addColumn('username',function ($query){
@@ -41,12 +46,18 @@ class ProductRatingDataTable extends DataTable
 //                }else{
 //                    return "<span class='bage badge-danger rounded'>inActive </span>";
 //                }
-                $html = '<div class="form-group">
+
+                $html = '';
+                if (\Gate::allows('Product Review-edit')) {
+                    $html = '<div class="form-group">
                     <select name="status" class="form-control SlectBox review_status"  data-id="'.$query->id.'"  >
                         <option '.($query->status === 1 ?"selected":"").'  value="1"> active</option>
                         <option '.($query->status === 0 ?"selected":"").'  value="0"> inactive </option>
                     </select>
                 </div>';
+
+                }
+
                 return $html;
             })
             ->rawColumns(['action','status','username'])

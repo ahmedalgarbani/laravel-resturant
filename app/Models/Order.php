@@ -11,7 +11,7 @@ class Order extends Model
     protected $fillable=[
       'order_status','currency_name','coupon_info','transaction_id','payment_approve_date',
       'payment_status','payment_method','product_qty','grand_total','subtotal','discount',
-        'address','user_id','invoice_id','address_id','delivery_charge'
+        'address','user_id','invoice_id','address_id','delivery_charge','delivery_area_id'
     ];
 
     protected $dispatchesEvents = [
